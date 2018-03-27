@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325214528) do
+ActiveRecord::Schema.define(version: 20180326155217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "body", null: false
+    t.bigint "hotel_id"
+    t.bigint "landmark_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id"], name: "index_comments_on_hotel_id"
+    t.index ["landmark_id"], name: "index_comments_on_landmark_id"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "photo_url", null: false
+    t.string "description"
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "photo_url", null: false
+    t.text "description", null: false
+    t.string "location", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_hotels_on_country_id"
+  end
+
+  create_table "landmarks", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "photo_url", null: false
+    t.string "location", null: false
+    t.text "description", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_landmarks_on_country_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,6 +63,8 @@ ActiveRecord::Schema.define(version: 20180325214528) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
