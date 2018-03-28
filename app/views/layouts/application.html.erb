@@ -8,12 +8,7 @@
     <%= javascript_include_tag "vendor/modernizr" %>
 
   <%= csrf_meta_tags %>
-  <style>
-      #map {
-       height: 400px;
-       width: 100%;
-      }
-   </style>
+  
 </head>
 <body>
 
@@ -35,24 +30,7 @@
       </ul>
     </section>
   </nav>
-  <h3>Map of Europe</h3>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var uluru = {lat: 54.5260, lng: 15.2551};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 3.5,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuipKsySUoz9RUDxMXCXbimgjr_0bCQvU&callback=initMap">
-    </script>
+
 
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %>">
