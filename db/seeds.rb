@@ -9,16 +9,26 @@
 Country.delete_all
 Hotel.delete_all
 
-spain = Country.create(
-  name: 'Spain',
-  photo_url: "https://ethicalboardroom.com/wp-content/uploads/2017/01/Spain-flag-map-plus-ultra.png",
-  description: 'One of the top places to visit.'
-)
+countries = ActiveSupport::JSON.decode(File.read('db/seeds/countries.json'))
 
-Hotel.create(
-  country_id: spain.id,
-  name: 'Mercer Hotel Barcelona',
-  photo_url: "https://media.hotelscombined.com/HI127257804.jpg",
-  description: '5 Star Hotel',
-  location: 'Barcelona, Spain'
-)
+countries.each do |country|
+  Country.create!(
+    name: country["name"],
+    photo_url: country["flag"],
+    description: country["subregion"]
+  )
+end
+
+# spain = Country.create(
+#   name: 'Spain',
+#   photo_url: "https://ethicalboardroom.com/wp-content/uploads/2017/01/Spain-flag-map-plus-ultra.png",
+#   description: 'One of the top places to visit.'
+
+
+# Hotel.create(
+#   country_id: spain.id,
+#   name: 'Mercer Hotel Barcelona',
+#   photo_url: "https://media.hotelscombined.com/HI127257804.jpg",
+#   description: '5 Star Hotel',
+#   location: 'Barcelona, Spain'
+# )

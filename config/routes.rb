@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'homes#index'
+  root 'static_pages#index'
   devise_for :users
   #resources :dashboard, only [:index]
   namespace :api do
@@ -8,5 +8,5 @@ Rails.application.routes.draw do
       resources :hotels, only: [:index, :show]
     end
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '*path' => redirect('/')# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

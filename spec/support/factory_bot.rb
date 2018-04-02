@@ -7,4 +7,9 @@ FactoryBot.define do
     password_confirmation 'password'
   end
 
+  factory :country do
+    name 'Spain'
+    description 'Beautiful Country'
+    photo_url 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3907387.png'
+  end
 end
