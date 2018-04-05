@@ -4,7 +4,11 @@ class Api::V1::HotelsController < ApplicationController
   end
 
   def show
-    @hotel= Hotel.find(params[:id])
-    render json: { hotel: @hotel}
+    @hotel = Hotel.find(country: params[:id])
+    country_id = @hotel.country.id
+    render json: {
+      hotel: @hotel
+      country_id: country_id
+    }
   end
 end

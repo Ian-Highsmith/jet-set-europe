@@ -10,7 +10,7 @@ class CountriesIndexContainer extends Component {
     // this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     fetch('/api/v1/countries')
     .then(response => {
       let parsed = response.json()
@@ -24,6 +24,7 @@ class CountriesIndexContainer extends Component {
     const { allCountries } = this.state;
     const renderCountries = allCountries.map(country => {
       return(
+        <div className="country-tile">
         <CountryTile
           key={country.id}
           id={country.id}
@@ -31,15 +32,18 @@ class CountriesIndexContainer extends Component {
           photo_url={country.photo_url}
           description={country.description}
         />
+      </div>
       )
     });
 
     return(
-      <div>
+      <div className="main-wrapper">
         <h3> Countries of Europe</h3>
+        <div className="countries-wrapper">
         <ul>
           {renderCountries}
         </ul>
+      </div>
       </div>
     )
   }

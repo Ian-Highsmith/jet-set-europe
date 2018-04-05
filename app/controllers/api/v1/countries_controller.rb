@@ -5,7 +5,7 @@ class Api::V1::CountriesController < ApplicationController
 
   def show
     @country = Country.find(params[:id])
-    @hotels = Hotel.where(country_id: params[:id])
+    @hotels = Hotel.where(country: params[:id])
     render json: { country: @country, hotels: @hotels }
   end
 end

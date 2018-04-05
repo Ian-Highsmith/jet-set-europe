@@ -10,6 +10,7 @@ Country.delete_all
 Hotel.delete_all
 
 countries = ActiveSupport::JSON.decode(File.read('db/seeds/countries.json'))
+hotels = ActiveSupport::JSON.decode(File.read('db/seeds/hotels.json'))
 
 countries.each do |country|
   Country.create!(
@@ -19,6 +20,17 @@ countries.each do |country|
   )
 end
 
+hotels.each do |hotel|
+  if hotel["country"]
+    country = Country.find_by(name: hotel["country"])
+  Hotel.create!(
+    name: hotel["name"],
+    photo_url: hotel["photo_url"],
+    location: hotel['location'],
+    description: hotel['description']
+    )
+  end
+end
 # spain = Country.create(
 #   name: 'Spain',
 #   photo_url: "https://ethicalboardroom.com/wp-content/uploads/2017/01/Spain-flag-map-plus-ultra.png",
