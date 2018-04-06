@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const HotelsTile = (props) => {
+const HotelTile = (props) => {
   return(
     <div className="hotel">
       <h4>{props.name}</h4>
@@ -14,4 +14,4 @@ const HotelsTile = (props) => {
   )
 }
 
-export default HotelsTile;
+export default HotelTile;

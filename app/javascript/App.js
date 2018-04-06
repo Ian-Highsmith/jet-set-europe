@@ -9,7 +9,7 @@ const App = props => {
     <Router history={browserHistory}>
       <Route path='/' component={Layout}>
         <IndexRoute component={CountriesIndexContainer} />
-        <Route path='/api/v1/countries/:country_id/hotels' component={CountryShowContainer}/>
+        <Route path='/api/v1/countries/:id' component={CountryShowContainer} />
       </Route>
     </Router>
   )
