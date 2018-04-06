@@ -10,7 +10,7 @@ Country.delete_all
 Hotel.delete_all
 
 countries = ActiveSupport::JSON.decode(File.read('db/seeds/countries.json'))
-hotels = ActiveSupport::JSON.decode(File.read('db/seeds/hotels.json'))
+hotels = ActiveSupport::JSON.decode(File.read('db/seeds/hotels.json'))['hotels']
 
 countries.each do |country|
   Country.create!(
@@ -20,14 +20,14 @@ countries.each do |country|
   )
 end
 
-hotels.each do |hotel|
-  if hotel["country"]
-    country = Country.find_by(name: hotel["country"])
-  Hotel.create!(
-    name: hotel["name"],
-    photo_url: hotel["photo_url"],
-    location: hotel['location'],
-    description: hotel['description']
+hotels.each do |country|
+  if Country.find_by(name: country['name'])
+    Hotel.create!(
+      country: Country.find_by(name: country['name']),
+      name: hotel['name'],
+      photo_url: hotel['photo_url'],
+      location: hotel['location'],
+      description: hotel['description']
     )
   end
 end
